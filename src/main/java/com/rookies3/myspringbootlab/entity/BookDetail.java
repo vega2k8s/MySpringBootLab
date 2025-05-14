@@ -14,6 +14,7 @@ public class BookDetail {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "book_detail_id")
     private Long id;
     
     @Column(columnDefinition = "TEXT")
