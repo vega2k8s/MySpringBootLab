@@ -28,7 +28,7 @@ public class BookService {
         return bookRepository.findAll()
                 .stream()
                 .map(BookDTO.Response::fromEntity)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public BookDTO.Response getBookById(Long id) {
@@ -47,14 +47,14 @@ public class BookService {
         return bookRepository.findByAuthorContainingIgnoreCase(author)
                 .stream()
                 .map(BookDTO.Response::fromEntity)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<BookDTO.Response> getBooksByTitle(String title) {
         return bookRepository.findByTitleContainingIgnoreCase(title)
                 .stream()
                 .map(BookDTO.Response::fromEntity)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Transactional
@@ -82,9 +82,10 @@ public class BookService {
                     .publisher(request.getDetailRequest().getPublisher())
                     .coverImageUrl(request.getDetailRequest().getCoverImageUrl())
                     .edition(request.getDetailRequest().getEdition())
+                    //연관관계 저장
                     .book(book)
                     .build();
-
+            //연관관계 저장
             book.setBookDetail(bookDetail);
         }
 
