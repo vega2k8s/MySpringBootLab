@@ -74,14 +74,14 @@ public class BookService {
                 .build();
 
         // Create book detail if provided
-        if (request.getDetailRequest() != null) {
+        if (request.getDetail() != null) {
             BookDetail bookDetail = BookDetail.builder()
-                    .description(request.getDetailRequest().getDescription())
-                    .language(request.getDetailRequest().getLanguage())
-                    .pageCount(request.getDetailRequest().getPageCount())
-                    .publisher(request.getDetailRequest().getPublisher())
-                    .coverImageUrl(request.getDetailRequest().getCoverImageUrl())
-                    .edition(request.getDetailRequest().getEdition())
+                    .description(request.getDetail().getDescription())
+                    .language(request.getDetail().getLanguage())
+                    .pageCount(request.getDetail().getPageCount())
+                    .publisher(request.getDetail().getPublisher())
+                    .coverImageUrl(request.getDetail().getCoverImageUrl())
+                    .edition(request.getDetail().getEdition())
                     //연관관계 저장
                     .book(book)
                     .build();
@@ -114,7 +114,7 @@ public class BookService {
         book.setPublishDate(request.getPublishDate());
 
         // Update book detail if provided
-        if (request.getDetailRequest() != null) {
+        if (request.getDetail() != null) {
             BookDetail bookDetail = book.getBookDetail();
 
             // Create new detail if not exists
@@ -125,12 +125,12 @@ public class BookService {
             }
 
             // Update detail fields
-            bookDetail.setDescription(request.getDetailRequest().getDescription());
-            bookDetail.setLanguage(request.getDetailRequest().getLanguage());
-            bookDetail.setPageCount(request.getDetailRequest().getPageCount());
-            bookDetail.setPublisher(request.getDetailRequest().getPublisher());
-            bookDetail.setCoverImageUrl(request.getDetailRequest().getCoverImageUrl());
-            bookDetail.setEdition(request.getDetailRequest().getEdition());
+            bookDetail.setDescription(request.getDetail().getDescription());
+            bookDetail.setLanguage(request.getDetail().getLanguage());
+            bookDetail.setPageCount(request.getDetail().getPageCount());
+            bookDetail.setPublisher(request.getDetail().getPublisher());
+            bookDetail.setCoverImageUrl(request.getDetail().getCoverImageUrl());
+            bookDetail.setEdition(request.getDetail().getEdition());
         }
 
         // Save and return updated book

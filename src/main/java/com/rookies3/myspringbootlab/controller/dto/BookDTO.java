@@ -32,7 +32,7 @@ public class BookDTO {
         private LocalDate publishDate;
 
         @Valid
-        private BookDetailDTO detailRequest;
+        private BookDetailDTO detail;
     }
 
     @Data
