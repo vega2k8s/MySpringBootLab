@@ -1,7 +1,8 @@
 package com.rookies3.myspringbootlab.controller;
 
 import com.rookies3.myspringbootlab.controller.dto.BookDTO;
-import com.rookies3.myspringbootlab.service.BookService;
+import com.rookies3.myspringbootlab.service.BookDetailService;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/api/books/details")
 @RequiredArgsConstructor
-public class BookController {
+public class BookDetailController {
 
-    private final BookService bookService;
+    private final BookDetailService bookService;
 
     @GetMapping
     public ResponseEntity<List<BookDTO.Response>> getAllBooks() {
@@ -34,13 +35,13 @@ public class BookController {
         BookDTO.Response book = bookService.getBookByIsbn(isbn);
         return ResponseEntity.ok(book);
     }
-    
+
     @GetMapping("/search/author")
     public ResponseEntity<List<BookDTO.Response>> getBooksByAuthor(@RequestParam String author) {
         List<BookDTO.Response> books = bookService.getBooksByAuthor(author);
         return ResponseEntity.ok(books);
     }
-    
+
     @GetMapping("/search/title")
     public ResponseEntity<List<BookDTO.Response>> getBooksByTitle(@RequestParam String title) {
         List<BookDTO.Response> books = bookService.getBooksByTitle(title);

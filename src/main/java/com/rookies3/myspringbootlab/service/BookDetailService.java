@@ -8,6 +8,7 @@ import com.rookies3.myspringbootlab.entity.Publisher;
 import com.rookies3.myspringbootlab.exception.BusinessException;
 import com.rookies3.myspringbootlab.exception.ErrorCode;
 import com.rookies3.myspringbootlab.repository.BookRepository;
+
 import com.rookies3.myspringbootlab.repository.PublisherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class BookService {
+public class BookDetailService {
 
     private final BookRepository bookRepository;
     private final PublisherRepository publisherRepository;

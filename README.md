@@ -1,6 +1,7 @@
-### [실습2-4] Spring Boot와 JPA(Java Persistence API) 활용
+### [실습2-5] Spring Boot와 JPA(Java Persistence API) 활용
 * Entity,Repository,RepositoryTest
 * Book 과 BookDetail  1:1 (OneToOne) 연관관계
+* Book 과 Publisher   1:N (OneToMany) 연관관계
     * FetchType.LAZY vs FetchType.EAGER
     * @JoinColumn, mappedBy
     * 연관관계의 주인(owner 와 종속(non-owner)
@@ -9,3 +10,4 @@
 * Service
 * DTO(Data Transfer Object)
 * Controller
+* Runner

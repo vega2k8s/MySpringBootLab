@@ -28,8 +28,11 @@ public class BookDTO {
         @PositiveOrZero(message = "Price must be positive or zero")
         private Integer price;
 
-        @Past(message = "Publish date must be in the past")
+        @PastOrPresent(message = "Publish date cannot be in the future")
         private LocalDate publishDate;
+
+        @NotNull(message = "Publisher ID is required")
+        private Long publisherId;
 
         @Valid
         private BookDetailDTO detail;
@@ -42,7 +45,10 @@ public class BookDTO {
     public static class BookDetailDTO {
         private String description;
         private String language;
+
+        @PositiveOrZero(message = "Page count must be positive or zero")
         private Integer pageCount;
+
         private String publisher;
         private String coverImageUrl;
         private String edition;
@@ -59,9 +65,14 @@ public class BookDTO {
         private String isbn;
         private Integer price;
         private LocalDate publishDate;
+        private PublisherDTO.SimpleResponse publisher;
         private BookDetailResponse detail;
 
         public static Response fromEntity(Book book) {
+            PublisherDTO.SimpleResponse publisherResponse = book.getPublisher() != null
+                    ? PublisherDTO.SimpleResponse.fromEntity(book.getPublisher())
+                    : null;
+
             BookDetailResponse detailResponse = book.getBookDetail() != null
                     ? BookDetailResponse.builder()
                     .id(book.getBookDetail().getId())
@@ -81,7 +92,28 @@ public class BookDTO {
                     .isbn(book.getIsbn())
                     .price(book.getPrice())
                     .publishDate(book.getPublishDate())
+                    .publisher(publisherResponse)
                     .detail(detailResponse)
+                    .build();
+        }
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class SimpleResponse {
+        private Long id;
+        private String title;
+        private String author;
+        private String isbn;
+
+        public static SimpleResponse fromEntity(Book book) {
+            return SimpleResponse.builder()
+                    .id(book.getId())
+                    .title(book.getTitle())
+                    .author(book.getAuthor())
+                    .isbn(book.getIsbn())
                     .build();
         }
     }
